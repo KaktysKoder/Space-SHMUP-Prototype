@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Hero.cs" />
+    <Compile Include="Assets\Scripts\Shield.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Art\Materials\UnlitAlpha.shader" />
