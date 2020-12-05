@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
@@ -19,20 +17,16 @@ public class Shield : MonoBehaviour
 
     private void Update()
     {
-        // Прочитать текущую мощность защитного поля из объекта-одиночки Него
-        int currLevel = Mathf.FloorToInt(Hero.Singleton.shieldLevel);
+        int currLevel = Mathf.FloorToInt(Hero.Singleton.shieldLevel);       // Прочитать текущую мощность защитного поля из объекта-одиночки Него.
 
-        // Если она отличаетсяя от levelShown
-        if (levelShown != currLevel)
+        if (levelShown != currLevel)                                        // Если она отличаетсяя от levelShown.
         {
             levelShown = currLevel;
 
-            // Скорректировать смещение в текстуре, чтобы отобразить поле с другой мощностью
-            mat.mainTextureOffset = new Vector2(0.2f * levelShown, 0);
+            mat.mainTextureOffset = new Vector2(0.2f * levelShown, 0);      // Скорректировать смещение в текстуре, чтобы отобразить поле с другой мощностью.
         }
 
-        // Поворачивать поле в каждом кадре с постоянной скоростью
-        float rZ = -(rotationsPerSecond * Time.deltaTime * 360) % 360f;
+        float rZ = -(rotationsPerSecond * Time.deltaTime * 360) % 360f;     // Поворачивать поле в каждом кадре с постоянной скоростью.
 
         transform.rotation = Quaternion.Euler(0, 0, rZ);
     }

@@ -8,10 +8,18 @@ public class BoundsCheck : MonoBehaviour
 {
     [Header("Set in Inspector")]
     public float radius = 1.0f;
+    public bool keepOnScreen = true;                // Когда он не позволяет игровому объекту выйти за границы экрана(true).
+
 
     [Header("Set Dynamically")]
+    public bool isOnScreen = true;                  // Получает значение false, если игровой объект вышел за границы экрана.
     public float camWidth;
     public float camHeight;
+
+    [HideInInspector] public bool offRight = default;
+    [HideInInspector] public bool offLeft  = default;
+    [HideInInspector] public bool offUp    = default;
+    [HideInInspector] public bool offDown  = default;
 
     void Awake()
     {
@@ -21,24 +29,55 @@ public class BoundsCheck : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 pos = transform.position; // Current position  = [0, 0, 0]
+        Vector3 pos = transform.position;           // Current position  = [0, 0, 0].
+        isOnScreen = true;
 
-        // camWidth  = 30.06211
-        // camHeight =  40
+        offRight = offLeft = offUp = offDown = false;
+
+        // camWidth  = 30.06211.
+        // camHeight =  40.
 
         if (pos.x > camWidth - radius)
+        {
             pos.x = camWidth - radius;
 
+            isOnScreen = false;
+            offRight = true;
+        }
+
         if (pos.x < -camWidth + radius)
+        {
             pos.x = -camWidth + radius;
 
+            isOnScreen = false;
+            offLeft = true;
+        }
+
         if (pos.y > camHeight - radius)
+        {
             pos.y = camHeight - radius;
 
+            isOnScreen = false;
+            offUp = true;
+        }
+
         if (pos.y < -camHeight + radius)
+        {
             pos.y = -camHeight + radius;
 
-        transform.position = pos;
+            isOnScreen = false;
+            offDown = true;
+        }
+
+        isOnScreen = !(offRight || offLeft || offUp || offDown);
+
+        if (keepOnScreen && !isOnScreen)
+        {
+            transform.position = pos;
+
+            isOnScreen = true;
+            offRight = offLeft = offUp = offDown = false;
+        }
     }
 
     private void OnDrawGizmos()

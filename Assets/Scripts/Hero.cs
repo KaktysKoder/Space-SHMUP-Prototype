@@ -26,19 +26,16 @@ public class Hero : MonoBehaviour
 
     private void Update()
     {
-        // Извлечь информацию из класса Input
-        float xAxis = Input.GetAxis("Horizontal");
+        float xAxis = Input.GetAxis("Horizontal");                                      // Извлечь информацию из класса Input.
         float yAxis = Input.GetAxis("Vertical");
 
-        // Изменить transform.position, опираясь на информацию по осям
-        Vector3 heroPosition = transform.position;
+        Vector3 heroPosition = transform.position;                                      // Изменить transform.position, опираясь на информацию по осям.
 
         heroPosition.x += xAxis * speed * Time.deltaTime;
         heroPosition.y += yAxis * speed * Time.deltaTime;
 
         transform.position = heroPosition;
 
-        // Повернуть корабль, чтобы придать ощущение динамизма
-        transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
+        transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);  // Повернуть корабль, чтобы придать ощущение динамизма.
     }
 }
