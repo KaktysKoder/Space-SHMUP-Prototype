@@ -17,17 +17,17 @@ public class BoundsCheck : MonoBehaviour
     public float camHeight;
 
     [HideInInspector] public bool offRight = default;
-    [HideInInspector] public bool offLeft  = default;
-    [HideInInspector] public bool offUp    = default;
-    [HideInInspector] public bool offDown  = default;
+    [HideInInspector] public bool offLeft = default;
+    [HideInInspector] public bool offUp = default;
+    [HideInInspector] public bool offDown = default;
 
-    void Awake()
+    private void Awake()
     {
         camHeight = Camera.main.orthographicSize;   // Получает значения поля Size главной камеры.
         camWidth = camHeight * Camera.main.aspect;  // Отношение ширины к высоте поля зрения камеры - Portrait (3:4).
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         Vector3 pos = transform.position;           // Current position  = [0, 0, 0].
         isOnScreen = true;

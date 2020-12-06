@@ -4,7 +4,6 @@ public class Main : MonoBehaviour
 {
     public static Main Singleton;
 
-
     [Header("Set in Inspector")]
     public GameObject[] prefabEnemies;          // Массив шаблонов Enemy
 
