@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
@@ -8,12 +9,39 @@ public class Hero : MonoBehaviour
     public float speed = 30.0f;
     public float rollMult = -45.0f;
     public float pitchMult = 30;
+    public float gameRestartDelay = 2.0f;
+    public float projectileSpeed = 40.0f;
+
+    [Header("Set reference")]
+    public GameObject projectilePrefab;
 
     [Header("Set Dynamically")]
-    public float shieldLevel = 1;
+    [SerializeField] private float _shieldLevel = 4;
 
     private GameObject lastTriggetGo = null;                                            // Эта переменная хранит ссылку на последний столкнувшейся игровой объект.
     private float factor = 0.6f;                                                        // Множитель для ускорения.
+
+    /// <summary>
+    /// Защитное поле.
+    /// </summary>
+    public float ShieldLevel
+    {
+        get => _shieldLevel;
+
+        set
+        {
+            _shieldLevel = Mathf.Min(value, 4);
+
+            // Если уровень защиты космического коробля меньше нуля, уничтожает Hero - т.е главного героя.
+            if (value < 0)
+            {
+                Destroy(this.gameObject);
+
+                // Сообщить объекту Main.S о необходимости перезапустить игру
+                Main.Singleton.DelayedRestart(gameRestartDelay);
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -46,6 +74,9 @@ public class Hero : MonoBehaviour
         {
             FlightAcceleration(heroPosition, factor, xAxis, yAxis);
         }
+
+        // Позволить коаблю выстрелить.
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,7 +92,7 @@ public class Hero : MonoBehaviour
 
         if (go.CompareTag("Enemy"))                                                     // Если защитное поле столкнулось с вражеским кораблём,
         {
-            shieldLevel--;                                                              // уменьшить его защиту, 
+            ShieldLevel--;                                                              // уменьшить его защиту, 
 
             Destroy(go);                                                                // и уничтожитьт.
         }
