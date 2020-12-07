@@ -76,7 +76,21 @@ public class Hero : MonoBehaviour
         }
 
         // Позволить коаблю выстрелить.
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            TempFire();
+        }
+    }
 
+    private void TempFire()
+    {
+        // Спавним снаряд, и устанавливаем местоположение равное this
+        GameObject projGO = Instantiate(projectilePrefab);
+        projGO.transform.position = transform.position;
+
+        // Запускаем снаряд up * projectileSpeed
+        Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
+        rigidB.velocity = Vector3.up * projectileSpeed;
     }
 
     private void OnTriggerEnter(Collider other)
