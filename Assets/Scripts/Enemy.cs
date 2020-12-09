@@ -47,4 +47,19 @@ public class Enemy : MonoBehaviour
             this.transform.position = value;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject otherGO = collision.gameObject;
+
+        if (otherGO.CompareTag("ProjectileHero"))
+        {
+            Destroy(otherGO);       // Уничтожить снаряд
+            Destroy(gameObject);    // Уничтожить игровой объект Enemy
+        }
+        else
+        {
+            print($"Enemy hit by non-ProjectileHero: {otherGO.name}");
+        }
+    }
 }

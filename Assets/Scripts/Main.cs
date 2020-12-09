@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
@@ -47,5 +48,18 @@ public class Main : MonoBehaviour
         go.transform.position = pos;
 
         Invoke("SpawnEnemy", 1.0f / enemySpawnPerSecond);
+    }
+
+    internal void DelayedRestart(float delay)
+    {
+        // Вызвать метод Restart() через delay секунд
+        Invoke("Restart", delay);
+    }
+
+
+    internal void Restart()
+    {
+        // Перезагрузить MainScene, чтобы перезапустить игру
+        SceneManager.LoadScene("MainScene");
     }
 }
