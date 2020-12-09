@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     public int score = 100;             // Очки за уничтожение этого коробля.
 
-    private BoundsCheck bndCheck;       // Проверка границ.
+    protected BoundsCheck bndCheck;       // Проверка границ.
 
     private void Awake()
     {
