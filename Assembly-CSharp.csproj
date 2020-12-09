@@ -61,7 +61,11 @@
     <Compile Include="Assets\Scripts\Shield.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Hero.cs" />
-    <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy_1.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy_2.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy_3.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy_4.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Art\Materials\UnlitAlpha.shader" />
